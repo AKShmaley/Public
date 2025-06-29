@@ -9,7 +9,14 @@ def collect_user_rates(user_login):
 
    while True:
        url = f'https://letterboxd.com/{user_login}/films/diary/page/{page_num}/'
-       html_content = requests.get(url).text
+       headers = {
+           'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
+           'Accept': '*/*',
+           'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+           'Referer': 'https://letterboxd.com/',
+           'Origin': 'https://letterboxd.com'
+       }
+       html_content = requests.get(url, headers=headers).text
 
        soup = BeautifulSoup(html_content, 'lxml')
 
